@@ -1,16 +1,16 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 export default function HomePage() {
   return (
     <>
       <h1>EasyRev</h1>
-      <Link to="/detailed">
+      <Link href="/good-page">
         <button type="button">Good</button>
       </Link>
-      <Link to="/detailed">
+      <Link href="/middle-page">
         <button type="button">Middle</button>
       </Link>
-      <Link to="/detailed">
+      <Link href="/bad-page">
         <button type="button">Bad</button>
       </Link>
     </>
