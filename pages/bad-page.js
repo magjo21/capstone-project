@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function GoodPage() {
+  const router = useRouter();
   const [button1, setButton1] = useState(false);
   const [button2, setButton2] = useState(false);
   const [button3, setButton3] = useState(false);
@@ -47,6 +49,10 @@ export default function GoodPage() {
       >
         Example
       </button>
+      <button onClick={() => router.push("/")}>Go Back to to Menu</button>
+
+      {/* is not working  */}
+      <button>Submit</button>
     </>
   );
 }

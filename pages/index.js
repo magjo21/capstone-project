@@ -13,6 +13,9 @@ export default function HomePage() {
       <Link href="/bad-page">
         <button type="button">Bad</button>
       </Link>
+      <Link href="/login.js">
+        <button type="button">Login</button>
+      </Link>
     </>
   );
 }
