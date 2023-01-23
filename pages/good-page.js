@@ -12,47 +12,47 @@ export default function GoodPage() {
 
   return (
     <>
-      <h1>Welcome to the Good Page</h1>
+      <h1>What did you particularly like?</h1>
       <button
         onClick={() => setButton1(!button1)}
         style={{ backgroundColor: button1 ? "green" : "white" }}
       >
-        Example
+        Hospitality
       </button>
       <button
         onClick={() => setButton2(!button2)}
         style={{ backgroundColor: button2 ? "green" : "white" }}
       >
-        Example
+        Cleanliness
       </button>
       <button
         onClick={() => setButton3(!button3)}
         style={{ backgroundColor: button3 ? "green" : "white" }}
       >
-        Example
+        Food Quality
       </button>
       <button
         onClick={() => setButton4(!button4)}
         style={{ backgroundColor: button4 ? "green" : "white" }}
       >
-        Example
+        Food Quantity
       </button>
       <button
         onClick={() => setButton5(!button5)}
         style={{ backgroundColor: button5 ? "green" : "white" }}
       >
-        Example
+        Taste
       </button>
       <button
         onClick={() => setButton6(!button6)}
         style={{ backgroundColor: button6 ? "green" : "white" }}
       >
-        Example
+        Ambience
       </button>
       <button onClick={() => router.push("/")}>Go Back to to Menu</button>
 
-      {/* is not working  */}
-      <button onClick={() => router.push("/thx")}>Submit</button>
+      {/* is not working  
+      <button>Submit</button>*/}
     </>
   );
 }
