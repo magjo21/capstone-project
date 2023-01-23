@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function GoodPage() {
   const router = useRouter();
@@ -49,7 +50,9 @@ export default function GoodPage() {
       >
         Ambience
       </button>
-      <button onClick={() => router.push("/")}>Go Back to to Menu</button>
+      <Link href="/">
+        <button type="button">Go Back to Menu</button>
+      </Link>
 
       {/* is not working  
       <button>Submit</button>*/}
