@@ -29,7 +29,7 @@ export default function GoodPage() {
 
   return (
     <>
-      <h1>What can we do Better? </h1>
+      <h1>What did you particulary like? </h1>
 
       {buttons.map((button) => {
         return (
@@ -48,8 +48,6 @@ export default function GoodPage() {
       <Link href="/">
         <button type="button">Go Back to Menu</button>
       </Link>
-
-      <button>Submit</button>
     </>
   );
 }

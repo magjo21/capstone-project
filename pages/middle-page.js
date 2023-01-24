@@ -48,8 +48,6 @@ export default function MiddlePage() {
       <Link href="/">
         <button type="button">Go Back to Menu</button>
       </Link>
-
-      <button>Submit</button>
     </>
   );
 }

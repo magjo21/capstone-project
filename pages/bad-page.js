@@ -29,7 +29,7 @@ export default function BadPage() {
 
   return (
     <>
-      <h1>What can we do Better? </h1>
+      <h1>What went wrong? </h1>
 
       {buttons.map((button) => {
         return (
@@ -48,8 +48,6 @@ export default function BadPage() {
       <Link href="/">
         <button type="button">Go Back to Menu</button>
       </Link>
-
-      <button>Submit</button>
     </>
   );
 }
