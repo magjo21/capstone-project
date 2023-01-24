@@ -2,60 +2,52 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
+const betterButtons = [
+  { id: "1", name: "Hospitality", status: false },
+  { id: "2", name: "cleanness", status: false },
+  { id: "3", name: "Food Quality", status: false },
+  { id: "4", name: "Food Quantity", status: false },
+  { id: "5", name: "Ambience", status: false },
+  { id: "6", name: "Friendlyness", status: false },
+];
+
 export default function GoodPage() {
   const router = useRouter();
-  const [button1, setButton1] = useState(false);
-  const [button2, setButton2] = useState(false);
-  const [button3, setButton3] = useState(false);
-  const [button4, setButton4] = useState(false);
-  const [button5, setButton5] = useState(false);
-  const [button6, setButton6] = useState(false);
+  const [buttons, setButtons] = useState(betterButtons);
+
+  function handleButtonStatus(id) {
+    setButtons(
+      buttons.map((button) => {
+        if (button.id === id) {
+          console.log(button);
+          return { ...button, status: !button.status };
+        }
+        return button;
+      })
+    );
+  }
 
   return (
     <>
-      <h1>What did you particularly like?</h1>
-      <button
-        onClick={() => setButton1(!button1)}
-        style={{ backgroundColor: button1 ? "green" : "white" }}
-      >
-        Hospitality
-      </button>
-      <button
-        onClick={() => setButton2(!button2)}
-        style={{ backgroundColor: button2 ? "green" : "white" }}
-      >
-        Cleanliness
-      </button>
-      <button
-        onClick={() => setButton3(!button3)}
-        style={{ backgroundColor: button3 ? "green" : "white" }}
-      >
-        Food Quality
-      </button>
-      <button
-        onClick={() => setButton4(!button4)}
-        style={{ backgroundColor: button4 ? "green" : "white" }}
-      >
-        Food Quantity
-      </button>
-      <button
-        onClick={() => setButton5(!button5)}
-        style={{ backgroundColor: button5 ? "green" : "white" }}
-      >
-        Taste
-      </button>
-      <button
-        onClick={() => setButton6(!button6)}
-        style={{ backgroundColor: button6 ? "green" : "white" }}
-      >
-        Ambience
-      </button>
+      <h1>What did you particulary like? </h1>
+
+      {buttons.map((button) => {
+        return (
+          <button
+            key={button.id}
+            onClick={() => {
+              handleButtonStatus(button.id);
+            }}
+            style={{ backgroundColor: button.status ? "green" : "white" }}
+          >
+            {button.name}
+          </button>
+        );
+      })}
+
       <Link href="/">
         <button type="button">Go Back to Menu</button>
       </Link>
-
-      {/* is not working  
-      <button>Submit</button>*/}
     </>
   );
 }
