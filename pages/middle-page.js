@@ -15,6 +15,10 @@ export default function MiddlePage() {
   const router = useRouter();
   const [buttons, setButtons] = useState(betterButtons);
 
+  function handleSubmit() {
+    window.localStorage.setItems(`buttons`, JSON.stringify(buttons));
+  }
+
   function handleButtonStatus(id) {
     setButtons(
       buttons.map((button) => {
@@ -47,6 +51,9 @@ export default function MiddlePage() {
 
       <Link href="/">
         <button type="button">Go Back to Menu</button>
+      </Link>
+      <Link href={"/thanks"}>
+        <button onClick={handleSubmit}>Submit</button>
       </Link>
     </>
   );
