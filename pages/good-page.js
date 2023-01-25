@@ -19,6 +19,7 @@ export default function GoodPage() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+    console.log(data);
   }
 
   function handleToggleAspects(id) {
@@ -31,7 +32,6 @@ export default function GoodPage() {
 
   return (
     <>
-      Active aspects: {activeAspects}
       <form onSubmit={handleSubmit}>
         {aspects.map((aspect) => (
           <div key={aspect.id}>
