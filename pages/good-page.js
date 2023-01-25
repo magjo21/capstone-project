@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 const initialAspects = [
@@ -45,7 +44,11 @@ export default function GoodPage() {
             />
           </div>
         ))}
-        <button type="submit">Submit</button>
+
+        <Link href="/thanks">
+          <button type="submit">Submit</button>
+        </Link>
+        <Link href="/">Go back to Menu</Link>
       </form>
     </>
   );

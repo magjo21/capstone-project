@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
-const betterButtons = [
+const initialAspects = [
   { id: "1", name: "Hospitality", status: false },
   { id: "2", name: "cleanness", status: false },
   { id: "3", name: "Food Quality", status: false },
@@ -12,49 +11,45 @@ const betterButtons = [
 ];
 
 export default function BadPage() {
-  const router = useRouter();
-  const [buttons, setButtons] = useState(betterButtons);
+  const [aspects, setAspects] = useState(initialAspects);
+  const activeAspects = aspects.filter((aspect) => aspect.status).length;
 
-  function handleSubmit() {
-    window.localStorage.setItems(`buttons`, JSON.stringify(buttons));
+  function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+    console.log(data);
   }
 
-  function handleButtonStatus(id) {
-    setButtons(
-      buttons.map((button) => {
-        if (button.id === id) {
-          console.log(button);
-          return { ...button, status: !button.status };
-        }
-        return button;
-      })
+  function handleToggleAspects(id) {
+    setAspects(
+      aspects.map((aspect_) =>
+        aspect_.id === id ? { ...aspect_, status: !aspect_.status } : aspect_
+      )
     );
   }
 
   return (
     <>
-      <h1>What went wrong? </h1>
+      <form onSubmit={handleSubmit}>
+        {aspects.map((aspect) => (
+          <div key={aspect.id}>
+            <label htmlFor={`${aspect}-checkbox`}>{aspect.name}</label>
+            <input
+              name={aspect.id}
+              type="checkbox"
+              id={`${aspect}-checkbox`}
+              checked={aspect.status}
+              onChange={() => handleToggleAspects(aspect.id)}
+            />
+          </div>
+        ))}
 
-      {buttons.map((button) => {
-        return (
-          <button
-            key={button.id}
-            onClick={() => {
-              handleButtonStatus(button.id);
-            }}
-            style={{ backgroundColor: button.status ? "green" : "white" }}
-          >
-            {button.name}
-          </button>
-        );
-      })}
-
-      <Link href="/">
-        <button type="button">Go Back to Menu</button>
-      </Link>
-      <Link href={"/thanks"}>
-        <button onClick={handleSubmit}>Submit</button>
-      </Link>
+        <Link href="/thanks">
+          <button type="submit">Submit</button>
+        </Link>
+        <Link href="/">Go back to Menu</Link>
+      </form>
     </>
   );
 }
