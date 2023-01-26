@@ -6,7 +6,7 @@ export default function Goodbye() {
       <h1>Thank You For your Feedback</h1>
       <p>Hope to see you again soon!</p>
 
-      <Link href={"/"}>See you later</Link>
+      <Link href="/">See you later</Link>
     </>
   );
 }
