@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import Router from "next/router";
 
 const initialAspects = [
   { id: "1", name: "Hospitality", status: false },
@@ -11,6 +12,7 @@ const initialAspects = [
 ];
 
 export default function BadPage() {
+  const router = Router;
   const [aspects, setAspects] = useState(initialAspects);
   const activeAspects = aspects.filter((aspect) => aspect.status).length;
 
@@ -18,7 +20,6 @@ export default function BadPage() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    console.log(data);
   }
 
   function handleToggleAspects(id) {
@@ -45,9 +46,9 @@ export default function BadPage() {
           </div>
         ))}
 
-        <Link href="/thanks">
-          <button type="submit">Submit</button>
-        </Link>
+        <button type="submit" onClick={() => router.push("/thanks")}>
+          Submit
+        </button>
         <Link href="/">Go back to Menu</Link>
       </form>
     </>
