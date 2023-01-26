@@ -49,9 +49,8 @@ export default function GoodPage() {
         <button type="submit" onClick={() => router.push("/thanks")}>
           Submit
         </button>
-
-        <Link href="/">Go back to Menu</Link>
       </form>
+      <Link href="/">Go back to Menu</Link>
     </>
   );
 }
