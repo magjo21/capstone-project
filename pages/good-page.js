@@ -20,6 +20,7 @@ export default function GoodPage() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+    router.push(`/thanks`);
   }
 
   function handleToggleAspects(id) {
@@ -46,12 +47,9 @@ export default function GoodPage() {
           </div>
         ))}
 
-        <button type="submit" onClick={() => router.push("/thanks")}>
-          Submit
-        </button>
-
-        <Link href="/">Go back to Menu</Link>
+        <button type="submit">Submit</button>
       </form>
+      <Link href="/">Go back to Menu</Link>
     </>
   );
 }
