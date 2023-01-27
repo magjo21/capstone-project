@@ -20,7 +20,7 @@ export default function GoodPage() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    router.push(`/thanks`);
+    router.push(`../user-pages/thanks`);
   }
 
   function handleToggleAspects(id) {
@@ -33,6 +33,7 @@ export default function GoodPage() {
 
   return (
     <>
+      <h1>{activeAspects}</h1>
       <form onSubmit={handleSubmit}>
         {aspects.map((aspect) => (
           <div key={aspect.id}>
