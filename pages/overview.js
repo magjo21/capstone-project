@@ -1,34 +1,51 @@
+import { useAtom } from "jotai";
 import Link from "next/link";
 import { globalReviews } from ".";
-import { useAtom } from "jotai";
 
 export default function Goodbye() {
   const [reviews] = useAtom(globalReviews);
   return (
     <>
       <h1>Overview</h1>
-      <p>Here comes the details page.</p>
+      <p>Here comes the details page and it should look litke this.</p>
 
-      <SVGIcon
-        name="happy emoticon"
-        variant="happy"
-        witdh="50px"
-        color="green"
-      />
-      <p>{reviews.good}</p>
+      <SVGIcon name="happy emoticon" variant="happy" witdh="50px" />
+      <p>{reviews.good.count}</p>
+      <ul>
+        {Object.entries(reviews.good.aspects).map(([key, val]) => {
+          return (
+            <li key={key}>
+              {key}: {val}
+            </li>
+          );
+        })}
+      </ul>
       <br />
 
-      <SVGIcon
-        name="neutral emoticon"
-        variant="neutral"
-        witdh="50px"
-        color="orange"
-      />
-      <p>{reviews.neutral}</p>
+      <SVGIcon name="neutral emoticon" variant="neutral" witdh="50px" />
+      <p>{reviews.neutral.count}</p>
+      <ul>
+        {Object.entries(reviews.neutral.aspects).map(([key, val]) => {
+          return (
+            <li key={key}>
+              {key}: {val}
+            </li>
+          );
+        })}
+      </ul>
       <br />
 
-      <SVGIcon name="sad emoticon" variant="sad" witdh="50px" color="red" />
-      <p>{reviews.bad}</p>
+      <SVGIcon name="sad emoticon" variant="sad" witdh="50px" />
+      <p>{reviews.bad.count}</p>
+      <ul>
+        {Object.entries(reviews.bad.aspects).map(([key, val]) => {
+          return (
+            <li key={key}>
+              {key}: {val}
+            </li>
+          );
+        })}
+      </ul>
       <br />
       <Link href="/">Go back</Link>
     </>
@@ -54,7 +71,7 @@ const paths = {
   },
 };
 
-function SVGIcon({ variant, width, color }) {
+function SVGIcon({ variant, width, color = "currentColor" }) {
   return (
     <svg viewBox={paths[variant].viewbox} width={width} fill={color}>
       <title>{variant}</title>
