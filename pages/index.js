@@ -73,7 +73,7 @@ const paths = {
   },
 };
 
-function SVGIcon({ variant, width, color }) {
+function SVGIcon({ variant, width }) {
   return (
     <svg viewBox={paths[variant].viewbox} width={width} fill={color}>
       <title>{variant}</title>
