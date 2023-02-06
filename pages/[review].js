@@ -36,7 +36,6 @@ export default function GoodPage() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    console.log(data["Food Quality"]);
 
     setReviews((previous) => {
       return {
@@ -68,7 +67,6 @@ export default function GoodPage() {
     });
     router.push(`/thanks`);
   }
-  console.log(reviews[review]);
   function handleToggleAspects(id) {
     setAspects(
       aspects.map((aspect_) =>
