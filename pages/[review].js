@@ -81,7 +81,7 @@ export default function GoodPage() {
       <h2>{activeAspects}</h2>
       <form onSubmit={handleSubmit}>
         {aspects.map((aspect) => (
-          <div key={aspect.id}>
+          <fieldset key={aspect.id}>
             <label htmlFor={`${aspect}-checkbox`}>{aspect.name}</label>
             <input
               name={aspect.name}
@@ -90,7 +90,7 @@ export default function GoodPage() {
               checked={aspect.status}
               onChange={() => handleToggleAspects(aspect.id)}
             />
-          </div>
+          </fieldset>
         ))}
 
         <button type="submit">Submit</button>
