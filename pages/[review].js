@@ -21,7 +21,7 @@ export default function GoodPage() {
   const [reviews, setReviews] = useAtom(globalReviews);
   const { review } = router.query;
 
-  if (review !== "good" && review !== "neutral" && review !== "bad") {
+  if (!["good", "neutral", "bad"].includes(review)) {
     return (
       <>
         <h1>404 Page not found</h1>
@@ -44,23 +44,23 @@ export default function GoodPage() {
           count: previous[review].count + 1,
           aspects: {
             hospitality: data.Hospitality
-              ? previous.good.aspects.hospitality + 1
-              : previous.good.aspects.hospitality,
+              ? previous[review].aspects.hospitality + 1
+              : previous[review].aspects.hospitality,
             cleanness: data.Cleanness
-              ? previous.good.aspects.cleanness + 1
-              : previous.good.aspects.cleanness,
+              ? previous[review].aspects.cleanness + 1
+              : previous[review].aspects.cleanness,
             foodQuailty: data["Food Quality"]
-              ? previous.good.aspects.foodQuailty + 1
-              : previous.good.aspects.foodQuailty,
+              ? previous[review].aspects.foodQuailty + 1
+              : previous[review].aspects.foodQuailty,
             foodQuantity: data["Food Quantity"]
-              ? previous.good.aspects.foodQuantity + 1
-              : previous.good.aspects.foodQuantity,
+              ? previous[review].aspects.foodQuantity + 1
+              : previous[review].aspects.foodQuantity,
             ambience: data.Ambience
-              ? previous.good.aspects.ambience + 1
-              : previous.good.aspects.ambience,
+              ? previous[review].aspects.ambience + 1
+              : previous[review].aspects.ambience,
             friendliness: data.Friendliness
-              ? previous.good.aspects.friendliness + 1
-              : previous.good.aspects.friendliness,
+              ? previous[review].aspects.friendliness + 1
+              : previous[review].aspects.friendliness,
           },
         },
       };
