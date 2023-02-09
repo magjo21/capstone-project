@@ -1,34 +1,33 @@
+import { useAtom } from "jotai";
 import Link from "next/link";
 import { globalReviews } from ".";
-import { useAtom } from "jotai";
 
 export default function Goodbye() {
   const [reviews] = useAtom(globalReviews);
-  let sum = reviews.good.count + reviews.neutral.count + reviews.bad.count;
+  const sum = reviews.good.count + reviews.neutral.count + reviews.bad.count;
 
   return (
     <>
       <h1>Overview</h1>
-      <p>Here comes the details page.</p>
-      <SVGIcon
-        name="happy emoticon"
-        variant="happy"
-        witdh="50px"
-        color="green"
-      />
+      <p>Here comes the details page and it should look litke this.</p>
+
+      <SVGIcon name="happy emoticon" variant="happy" witdh="50px" />
+      <p>{reviews.good.count}</p>
+      <Link href="/details/good">Details</Link>
 
       <br />
-      <SVGIcon
-        name="neutral emoticon"
-        variant="neutral"
-        witdh="50px"
-        color="orange"
-      />
 
+      <SVGIcon name="neutral emoticon" variant="neutral" witdh="50px" />
+      <p>{reviews.neutral.count}</p>
+      <Link href="/details/neutral">Details</Link>
       <br />
-      <SVGIcon name="sad emoticon" variant="sad" witdh="50px" color="red" />
 
+      <SVGIcon name="sad emoticon" variant="sad" witdh="50px" />
+      <p>{reviews.bad.count}</p>
+      <Link href="/details/bad">Details</Link>
       <br />
+      <br />
+
       <Link href="/">Go back</Link>
     </>
   );
@@ -53,7 +52,7 @@ const paths = {
   },
 };
 
-function SVGIcon({ variant, width, color }) {
+function SVGIcon({ variant, width, color = "currentColor" }) {
   return (
     <svg viewBox={paths[variant].viewbox} width={width} fill={color}>
       <title>{variant}</title>
