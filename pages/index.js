@@ -2,7 +2,42 @@ import { atom, useAtom } from "jotai";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export const globalReviews = atom({ good: 0, neutral: 0, bad: 0 });
+export const globalReviews = atom({
+  good: {
+    count: 0,
+
+    aspects: [
+      { name: "Hospitality", key: "hospitality", value: 0 },
+      { name: "Cleaness", key: "cleaness", value: 0 },
+      { name: "Food Quality", key: "foodQuailty", value: 0 },
+      { name: "Food Quantity", key: "foodQuantity", value: 0 },
+      { name: "Ambience", key: "ambience", value: 0 },
+      { name: "Friendliness", key: "friendliness", value: 0 },
+    ],
+  },
+  neutral: {
+    count: 0,
+    aspects: [
+      { name: "Hospitality", key: "hospitality", value: 0 },
+      { name: "Cleaness", key: "cleaness", value: 0 },
+      { name: "Food Quality", key: "foodQuailty", value: 0 },
+      { name: "Food Quantity", key: "foodQuantity", value: 0 },
+      { name: "Ambience", key: "ambience", value: 0 },
+      { name: "Friendliness", key: "friendliness", value: 0 },
+    ],
+  },
+  bad: {
+    count: 0,
+    aspects: [
+      { name: "Hospitality", key: "hospitality", value: 0 },
+      { name: "Cleaness", key: "cleaness", value: 0 },
+      { name: "Food Quality", key: "foodQuailty", value: 0 },
+      { name: "Food Quantity", key: "foodQuantity", value: 0 },
+      { name: "Ambience", key: "ambience", value: 0 },
+      { name: "Friendliness", key: "friendliness", value: 0 },
+    ],
+  },
+});
 
 export default function HomePage() {
   const router = useRouter();
@@ -12,42 +47,29 @@ export default function HomePage() {
       <h1>EasyRev</h1>
       <button
         onClick={() => {
-          setReviews({ ...reviews, good: reviews.good + 1 });
-          router.push("../user-pages/good-page");
+          router.push("/good");
         }}
       >
-        <SVGIcon
-          name="happy emoticon"
-          variant="happy"
-          witdh="50px"
-          color="green"
-        />
+        <SVGIcon name="happy emoticon" variant="happy" witdh="50px" />
       </button>
       <br />
       <button
         onClick={() => {
-          setReviews({ ...reviews, neutral: reviews.neutral + 1 });
-          router.push("../user-pages/neutral-page");
+          router.push("/neutral");
         }}
       >
-        <SVGIcon
-          name="neutral emoticon"
-          variant="neutral"
-          witdh="50px"
-          color="orange"
-        />
+        <SVGIcon name="neutral emoticon" variant="neutral" witdh="50px" />
       </button>
       <br />
       <button
         onClick={() => {
-          setReviews({ ...reviews, bad: reviews.bad + 1 });
-          router.push("../user-pages/bad-page");
+          router.push("/bad");
         }}
       >
-        <SVGIcon name="sad emoticon" variant="sad" witdh="50px" color="red" />
+        <SVGIcon name="sad emoticon" variant="sad" witdh="50px" />
       </button>
       <br />
-      <Link href="overview">
+      <Link href="/overview">
         <SVGIcon name="menu" variant="overview" width="50px" />
       </Link>
     </>
@@ -73,7 +95,7 @@ const paths = {
   },
 };
 
-function SVGIcon({ variant, width }) {
+function SVGIcon({ variant, width, color = "currentColor" }) {
   return (
     <svg viewBox={paths[variant].viewbox} width={width} fill={color}>
       <title>{variant}</title>

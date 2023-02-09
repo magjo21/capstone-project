@@ -4,31 +4,30 @@ import { useAtom } from "jotai";
 
 export default function Goodbye() {
   const [reviews] = useAtom(globalReviews);
+  let sum = reviews.good.count + reviews.neutral.count + reviews.bad.count;
+
   return (
     <>
       <h1>Overview</h1>
       <p>Here comes the details page.</p>
-
       <SVGIcon
         name="happy emoticon"
         variant="happy"
         witdh="50px"
         color="green"
       />
-      <p>{reviews.good}</p>
-      <br />
 
+      <br />
       <SVGIcon
         name="neutral emoticon"
         variant="neutral"
         witdh="50px"
         color="orange"
       />
-      <p>{reviews.neutral}</p>
-      <br />
 
+      <br />
       <SVGIcon name="sad emoticon" variant="sad" witdh="50px" color="red" />
-      <p>{reviews.bad}</p>
+
       <br />
       <Link href="/">Go back</Link>
     </>

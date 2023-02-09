@@ -1,26 +1,60 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import Router from "next/router";
+import { globalReviews } from ".";
+import { useAtom } from "jotai";
+import { useRouter } from "next/router";
+
+console.clear();
 
 const initialAspects = [
   { id: "1", name: "Hospitality", status: false },
-  { id: "2", name: "cleanness", status: false },
+  { id: "2", name: "Cleanness", status: false },
   { id: "3", name: "Food Quality", status: false },
   { id: "4", name: "Food Quantity", status: false },
   { id: "5", name: "Ambience", status: false },
-  { id: "6", name: "Friendlyness", status: false },
+  { id: "6", name: "Friendliness", status: false },
 ];
 
 export default function GoodPage() {
-  const router = Router;
+  const router = useRouter();
   const [aspects, setAspects] = useState(initialAspects);
+  const [reviews, setReviews] = useAtom(globalReviews);
+  const { review } = router.query;
+
+  if (!["good", "neutral", "bad"].includes(review)) {
+    return (
+      <>
+        <h1>404 Page not found</h1>
+        <Link href={"/"}>GO Back to Home</Link>
+      </>
+    );
+  }
+
   const activeAspects = aspects.filter((aspect) => aspect.status).length;
 
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    router.push(`../user-pages/thanks`);
+
+    setReviews((previous) => {
+      const newAspects = previous[review].aspects.map((aspect) => {
+        return {
+          ...aspect,
+          value: data[aspect.name] ? aspect.value + 1 : aspect.value,
+        };
+      });
+
+      return {
+        ...previous,
+        [review]: {
+          ...previous[review],
+          aspects: newAspects,
+          count: previous[review].count + 1,
+        },
+      };
+    });
+    router.push(`/thanks`);
   }
 
   function handleToggleAspects(id) {
@@ -33,19 +67,20 @@ export default function GoodPage() {
 
   return (
     <>
-      <h1>{activeAspects}</h1>
+      <h1>{review}</h1>
+      <h2>{activeAspects}</h2>
       <form onSubmit={handleSubmit}>
         {aspects.map((aspect) => (
-          <div key={aspect.id}>
+          <fieldset key={aspect.id}>
             <label htmlFor={`${aspect}-checkbox`}>{aspect.name}</label>
             <input
-              name={aspect.id}
+              name={aspect.name}
               type="checkbox"
               id={`${aspect}-checkbox`}
               checked={aspect.status}
               onChange={() => handleToggleAspects(aspect.id)}
             />
-          </div>
+          </fieldset>
         ))}
 
         <button type="submit">Submit</button>
