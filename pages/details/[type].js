@@ -23,5 +23,7 @@ export default function Detailpage() {
         <Link href={"/overview"}>Go back</Link>
       </>
     );
+  } else {
+    return <p>Try again</p>;
   }
 }
