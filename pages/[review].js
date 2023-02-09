@@ -38,35 +38,25 @@ export default function GoodPage() {
     const data = Object.fromEntries(formData);
 
     setReviews((previous) => {
+      const newAspects = previous[review].aspects.map((aspect) => {
+        return {
+          ...aspect,
+          value: data[aspect.name] ? aspect.value + 1 : aspect.value,
+        };
+      });
+
       return {
         ...previous,
         [review]: {
+          ...previous[review],
+          aspects: newAspects,
           count: previous[review].count + 1,
-          aspects: {
-            hospitality: data.Hospitality
-              ? previous[review].aspects.hospitality + 1
-              : previous[review].aspects.hospitality,
-            cleanness: data.Cleanness
-              ? previous[review].aspects.cleanness + 1
-              : previous[review].aspects.cleanness,
-            foodQuailty: data["Food Quality"]
-              ? previous[review].aspects.foodQuailty + 1
-              : previous[review].aspects.foodQuailty,
-            foodQuantity: data["Food Quantity"]
-              ? previous[review].aspects.foodQuantity + 1
-              : previous[review].aspects.foodQuantity,
-            ambience: data.Ambience
-              ? previous[review].aspects.ambience + 1
-              : previous[review].aspects.ambience,
-            friendliness: data.Friendliness
-              ? previous[review].aspects.friendliness + 1
-              : previous[review].aspects.friendliness,
-          },
         },
       };
     });
     router.push(`/thanks`);
   }
+
   function handleToggleAspects(id) {
     setAspects(
       aspects.map((aspect_) =>
