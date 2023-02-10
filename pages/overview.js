@@ -11,18 +11,18 @@ export default function Goodbye() {
     <>
       <h1>Overview</h1>
       <SVGIcon name="happy emoticon" variant="happy" witdh="50px" />
-      <p>{reviews.good.count}</p>
+      <p>{((reviews.good.count / sum) * 100) | 0}%</p>
       <Link href="/details/good">Details</Link>
 
       <br />
 
       <SVGIcon name="neutral emoticon" variant="neutral" witdh="50px" />
-      <p>{reviews.neutral.count}</p>
+      <p>{((reviews.neutral.count / sum) * 100) | 0}%</p>
       <Link href="/details/neutral">Details</Link>
       <br />
 
       <SVGIcon name="sad emoticon" variant="sad" witdh="50px" />
-      <p>{reviews.bad.count}</p>
+      <p>{((reviews.bad.count / sum) * 100) | 0}%</p>
       <Link href="/details/bad">Details</Link>
       <br />
       <br />
