@@ -1,8 +1,10 @@
 import { SVGIcon } from "@/components/SVGIcons";
 import Link from "next/link";
 import useSWR from "swr";
+import { useRouter } from "next/router";
 
 export default function Goodbye() {
+  const router = useRouter();
   const { data, isloading, error } = useSWR(`/api/restaurant/${1234}`);
 
   if (isloading) {
@@ -64,6 +66,7 @@ export default function Goodbye() {
     } catch (error) {
       console.error(error);
     }
+    router.reload();
   }
 
   return (
