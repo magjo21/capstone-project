@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { globalReviews } from ".";
-import { useAtom } from "jotai";
 import { useRouter } from "next/router";
-
-console.clear();
+import useSWR from "swr";
 
 const initialAspects = [
   { id: "1", name: "Hospitality", status: false },
@@ -18,8 +15,19 @@ const initialAspects = [
 export default function GoodPage() {
   const router = useRouter();
   const [aspects, setAspects] = useState(initialAspects);
-  const [reviews, setReviews] = useAtom(globalReviews);
   const { review } = router.query;
+  const {
+    data: restaurantData,
+    isloading,
+    error,
+  } = useSWR(`/api/restaurant/${1234}`);
+
+  if (isloading) {
+    return <p>Is Loading</p>;
+  }
+  if (error) {
+    return <p>404 ERORR!!!</p>;
+  }
 
   if (!["good", "neutral", "bad"].includes(review)) {
     return (
@@ -32,28 +40,38 @@ export default function GoodPage() {
 
   const activeAspects = aspects.filter((aspect) => aspect.status).length;
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-
-    setReviews((previous) => {
-      const newAspects = previous[review].aspects.map((aspect) => {
-        return {
-          ...aspect,
-          value: data[aspect.name] ? aspect.value + 1 : aspect.value,
-        };
-      });
-
+    const newReview = restaurantData.reviews[review].aspects.map((aspect) => {
       return {
-        ...previous,
-        [review]: {
-          ...previous[review],
-          aspects: newAspects,
-          count: previous[review].count + 1,
-        },
+        ...aspect,
+        value: data[aspect.name] ? aspect.value + 1 : aspect.value,
       };
     });
+    const newRestaurant = {
+      ...restaurantData,
+      reviews: {
+        ...restaurantData.reviews,
+        [review]: {
+          ...restaurantData.reviews[review],
+          aspects: newReview,
+          count: restaurantData.reviews[review].count + 1,
+        },
+      },
+    };
+
+    try {
+      const response = await fetch(`/api/restaurant/${1234}`, {
+        method: "PUT",
+        body: JSON.stringify(newRestaurant),
+        headers: { "Content-type": "application/json" },
+      });
+      if (!response.ok) console.error(`error: response.status`);
+    } catch (error) {
+      console.error(error);
+    }
     router.push(`/thanks`);
   }
 

@@ -1,18 +1,24 @@
 import { useRouter } from "next/router";
-import { globalReviews } from "..";
-import { useAtom } from "jotai";
 import Link from "next/link";
+import useSWR from "swr";
 
 export default function Detailpage() {
   const router = useRouter();
   const { type } = router.query;
-  const [reviews, setReviews] = useAtom(globalReviews);
+  const { data, isloading, error } = useSWR(`/api/restaurant/${1234}`);
+
+  if (isloading) {
+    return <p>Is Loading</p>;
+  }
+  if (error) {
+    return <p>404 ERORR!!!</p>;
+  }
 
   if (type) {
     return (
       <>
         <ul>
-          {reviews[type].aspects.map((aspect) => {
+          {data?.reviews[type].aspects.map((aspect) => {
             return (
               <li key={aspect.key}>
                 {aspect.name}: {aspect.value}
