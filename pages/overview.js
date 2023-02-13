@@ -16,6 +16,56 @@ export default function Goodbye() {
     data?.reviews.neutral.count +
     data?.reviews.bad.count;
 
+  const emptyReview = {
+    reviews: {
+      good: {
+        count: 0,
+        aspects: [
+          { name: "Hospitality", key: "hospitality", value: 0 },
+          { name: "Cleaness", key: "cleaness", value: 0 },
+          { name: "Food Quality", key: "foodQuality", value: 0 },
+          { name: "Food Quantity", key: "foodQuantity", value: 0 },
+          { name: "Ambience", key: "ambience", value: 0 },
+          { name: "Friendliness", key: "friendliness", value: 0 },
+        ],
+      },
+      neutral: {
+        count: 0,
+        aspects: [
+          { name: "Hospitality", key: "hospitality", value: 0 },
+          { name: "Cleaness", key: "cleaness", value: 0 },
+          { name: "Food Quality", key: "foodQuality", value: 0 },
+          { name: "Food Quantity", key: "foodQuantity", value: 0 },
+          { name: "Ambience", key: "ambience", value: 0 },
+          { name: "Friendliness", key: "friendliness", value: 0 },
+        ],
+      },
+      bad: {
+        count: 0,
+        aspects: [
+          { name: "Hospitality", key: "hospitality", value: 0 },
+          { name: "Cleaness", key: "cleaness", value: 0 },
+          { name: "Food Quality", key: "foodQuality", value: 0 },
+          { name: "Food Quantity", key: "foodQuantity", value: 0 },
+          { name: "Ambience", key: "ambience", value: 0 },
+          { name: "Friendliness", key: "friendliness", value: 0 },
+        ],
+      },
+    },
+  };
+  async function handleRefresh() {
+    try {
+      const response = await fetch(`/api/restaurant/${1234}`, {
+        method: "PUT",
+        body: JSON.stringify(emptyReview),
+        headers: { "Content-type": "application/json" },
+      });
+      if (!response.ok) console.error(`error: response.status`);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <>
       <h1>Overview</h1>
@@ -34,6 +84,9 @@ export default function Goodbye() {
       <p>{((data?.reviews.bad.count / sum) * 100) | 0}%</p>
       <Link href="/details/bad">Details</Link>
       <br />
+      <button type="button" onClick={handleRefresh}>
+        Refresh
+      </button>
       <br />
 
       <Link href="/">Go back</Link>
