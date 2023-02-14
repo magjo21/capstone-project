@@ -19,9 +19,13 @@ const paths = {
 
 export function SVGIcon({ variant, width, color = "currentColor" }) {
   return (
-    <svg viewBox={paths[variant].viewbox} width={width} fill={color}>
+    <svg viewBox="0 0 24 24" width={width} fill={color}>
       <title>{variant}</title>
       <path d={paths[variant].path} />
     </svg>
   );
+}
+
+{
+  /* <svg viewBox={paths[variant].viewbox} width={width} fill={color}></svg> */
 }
