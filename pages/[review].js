@@ -143,7 +143,7 @@ export default function GoodPage() {
     return (
       <>
         <h1>404 Page not found</h1>
-        <StyledSubmit href={"/"}>GO Back to Home</StyledSubmit>
+        <Link href={"/"}>GO Back to Home</Link>
       </>
     );
   }
