@@ -35,7 +35,7 @@ const EmoticonText = styled.p`
   font-size: 24px;
 `;
 
-const DetailsLink = styled.a`
+const DetailsLink = styled(Link)`
   margin-left: 10px;
   font-size: 16px;
   background-color: #bebebe;
