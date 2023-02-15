@@ -10,32 +10,31 @@ const Container = styled.div`
   align-items: center;
   background-color: lightblue;
   height: 100vh;
+`;
+const StyledUl = styled.ul`
+  list-style-type: none;
+  :20px ;
+`;
 
-  ul {
-    list-style-type: none;
-    :20px ;
-  }
+const StyledLi = styled.li`
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: lightgrey;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 30px;
+  position: relative;
+`;
 
-  li {
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-    background-color: lightgrey;
-    display: flex;
-    justify-content: space-between;
-    padding-right: 30px;
-    position: relative;
-  }
-
-  li div {
-    position: absolute;
-    border-radius: 5px;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    padding: 10px;
-    background-color: #dcdcdc;
-  }
+const StyledDivLi = styled.div`
+  position: absolute;
+  border-radius: 5px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  background-color: #dcdcdc;
 `;
 
 const StyledLink = styled(Link)`
@@ -73,16 +72,16 @@ export default function Detailpage() {
     return (
       <Container>
         <h1>Details</h1>
-        <ul>
+        <StyledUl>
           {data?.reviews[type].aspects.map((aspect) => {
             return (
-              <li key={aspect.key}>
+              <StyledLi key={aspect.key}>
                 {aspect.name}
-                <div>{aspect.value}</div>
-              </li>
+                <StyledDivLi>{aspect.value}</StyledDivLi>
+              </StyledLi>
             );
           })}
-        </ul>
+        </StyledUl>
         <StyledLink href={"/overview"}>Go back</StyledLink>
       </Container>
     );
