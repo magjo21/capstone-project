@@ -65,9 +65,6 @@ export default function HomePage() {
       >
         <SVGIcon name="sad emoticon" variant="sad" width="80px" color="red" />
       </RoundButton>
-      <Link href="/overview">
-        <SVGIcon name="menu" variant="overview" width="50px" />
-      </Link>
     </HomePageContainer>
   );
 }
