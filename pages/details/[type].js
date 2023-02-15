@@ -13,7 +13,6 @@ const Container = styled.div`
 `;
 const StyledUl = styled.ul`
   list-style-type: none;
-  :20px ;
 `;
 
 const StyledLi = styled.li`
